@@ -7,7 +7,6 @@
 
 """
 import sys
-import time
 
 
 def alphabetize(string):
@@ -36,12 +35,15 @@ def find_anagrams(words):
         {'dgo': ['dog'], 'act': ['cat', 'act']}
 
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
-    return anagrams
+
+    anagram_sets = {}
+    for word in words:
+        if alphabetize(word) in anagram_sets:
+            anagram_sets[alphabetize(word)].append(word)
+        else:
+            anagram_sets[alphabetize(word)] = [word]
+
+    return anagram_sets
 
 
 if __name__ == "__main__":
